@@ -34,6 +34,8 @@
             pbPaddelGegner = new PictureBox();
             pbPong = new PictureBox();
             timer1 = new System.Windows.Forms.Timer(components);
+            lGewonnen = new Label();
+            lVerloren = new Label();
             ((System.ComponentModel.ISupportInitialize)pbPaddelSpieler).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPaddelGegner).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPong).BeginInit();
@@ -72,11 +74,35 @@
             timer1.Interval = 10;
             timer1.Tick += timer1_Tick;
             // 
+            // lGewonnen
+            // 
+            lGewonnen.AutoSize = true;
+            lGewonnen.Font = new Font("Showcard Gothic", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lGewonnen.Location = new Point(272, 103);
+            lGewonnen.Name = "lGewonnen";
+            lGewonnen.Size = new Size(246, 50);
+            lGewonnen.TabIndex = 3;
+            lGewonnen.Text = "Gewonnen";
+            lGewonnen.Visible = false;
+            // 
+            // lVerloren
+            // 
+            lVerloren.AutoSize = true;
+            lVerloren.Font = new Font("Showcard Gothic", 24F, FontStyle.Bold, GraphicsUnit.Point);
+            lVerloren.Location = new Point(272, 293);
+            lVerloren.Name = "lVerloren";
+            lVerloren.Size = new Size(228, 50);
+            lVerloren.TabIndex = 4;
+            lVerloren.Text = "Verloren";
+            lVerloren.Visible = false;
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(802, 453);
+            Controls.Add(lVerloren);
+            Controls.Add(lGewonnen);
             Controls.Add(pbPong);
             Controls.Add(pbPaddelGegner);
             Controls.Add(pbPaddelSpieler);
@@ -86,6 +112,7 @@
             ((System.ComponentModel.ISupportInitialize)pbPaddelGegner).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPong).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -94,5 +121,7 @@
         private PictureBox pbPaddelGegner;
         private PictureBox pbPong;
         private System.Windows.Forms.Timer timer1;
+        private Label lGewonnen;
+        private Label lVerloren;
     }
 }

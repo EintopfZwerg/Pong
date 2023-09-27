@@ -46,7 +46,7 @@
             pbPaddelSpieler.BackColor = SystemColors.ActiveCaptionText;
             pbPaddelSpieler.Location = new Point(12, 160);
             pbPaddelSpieler.Name = "pbPaddelSpieler";
-            pbPaddelSpieler.Size = new Size(10, 125);
+            pbPaddelSpieler.Size = new Size(10, 120);
             pbPaddelSpieler.TabIndex = 0;
             pbPaddelSpieler.TabStop = false;
             // 
@@ -55,7 +55,7 @@
             pbPaddelGegner.BackColor = SystemColors.ActiveCaptionText;
             pbPaddelGegner.Location = new Point(780, 160);
             pbPaddelGegner.Name = "pbPaddelGegner";
-            pbPaddelGegner.Size = new Size(10, 125);
+            pbPaddelGegner.Size = new Size(10, 120);
             pbPaddelGegner.TabIndex = 1;
             pbPaddelGegner.TabStop = false;
             // 
@@ -71,7 +71,7 @@
             // timer1
             // 
             timer1.Enabled = true;
-            timer1.Interval = 10;
+            timer1.Interval = 5;
             timer1.Tick += timer1_Tick;
             // 
             // lGewonnen

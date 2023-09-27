@@ -17,6 +17,7 @@ namespace Pong
         private void timer1_Tick(object sender, EventArgs e)
         {
             MovePaddel();
+            MoveGegner();
             Begrenzung();
             MovePong();
             PaddelKontaktLinks();
@@ -24,17 +25,38 @@ namespace Pong
             Restart();
         }
 
+        void MoveGegner()
+        {
+            if (PongY >= pbPaddelGegner.Top)
+            {
+                if (pbPaddelGegner.Top <= 0)
+                {
+                    return;
+                }
+                pbPaddelGegner.Top++;
+                return;
+            }
+            if (PongY <= pbPaddelGegner.Bottom)
+            {
+                //if (pbPaddelGegner.Bottom >= 380)
+                //{
+                //    return;
+                //}
+                pbPaddelGegner.Top--;
+                return;
+            }
+        }
         void Restart()
         {
             if (pbPong.Right >= 820)
             {
-                timer1.Stop();
+                timer1.Enabled = false;
                 lGewonnen.Visible = true;
 
             }
             if (pbPong.Left <= 0)
             {
-                timer1.Stop();
+                timer1.Enabled = false;
                 lVerloren.Visible = true;
             }
         }
@@ -88,13 +110,16 @@ namespace Pong
             else
             {
                 PongX--;
+                PongX--;
             }
             if (MovepongY == 1)
             {
                 PongY++;
+                PongY++;
             }
             else
             {
+                PongY--;
                 PongY--;
             }
             pbPong.Top = PongY;

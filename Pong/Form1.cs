@@ -18,13 +18,30 @@ namespace Pong
         {
             MovePaddel();
             MoveGegner();
+            MoveGegner();
             Begrenzung();
             MovePong();
             PaddelKontaktLinks();
             PaddelKontaktRechts();
-            Restart();
+            Ende();
         }
 
+        void Restart()
+        {
+            timer1.Enabled = true;
+            lRestart.Visible = false;
+            lGewonnen.Visible = false;
+            lVerloren.Visible = false;
+            PongX = 410;
+            PongY = 250;
+            Random r = new Random();
+            int x, y;
+
+            MovepongX = r.Next(0, 2);
+            MovepongY = r.Next(0, 2);
+
+
+        }
         void MoveGegner()
         {
             if (PongY >= pbPaddelGegner.Top)
@@ -46,47 +63,69 @@ namespace Pong
                 return;
             }
         }
-        void Restart()
+        void Ende()
         {
             if (pbPong.Right >= 820)
             {
                 timer1.Enabled = false;
                 lGewonnen.Visible = true;
-
+                lRestart.Visible = true;
             }
             if (pbPong.Left <= 0)
             {
                 timer1.Enabled = false;
                 lVerloren.Visible = true;
+                lRestart.Visible = true;
             }
+
+
         }
         void PaddelKontaktRechts()
         {
-            if (pbPaddelGegner.Bounds.IntersectsWith(pbPong.Bounds))
             {
-                if (MovepongX == 0)
+
+                if (pbPong.Bounds.IntersectsWith(pbPaddelGegner.Bounds))
                 {
-                    MovepongX = 1;
-                }
-                else
-                {
-                    MovepongX = 0;
+                    // Ändern Sie den Abprallrichtung des Balls
+                    int paddelRand = pbPaddelGegner.Top + (pbPaddelGegner.Left / 2);
+                    if (PongY <= paddelRand)
+                    {
+                        // Der Ball prallt nahe der linken Kante des Paddels ab
+                        MovepongX = 0;
+                        MovepongY = 0;
+                        return;
+                    }
+                    else
+                    {
+                        // Der Ball prallt nahe der rechten Kante des Paddels ab
+                        MovepongX = 0;
+                        MovepongY = 1;
+                        return;
+                    }
                 }
             }
         }
         void PaddelKontaktLinks()
         {
-            if (pbPaddelSpieler.Bounds.IntersectsWith(pbPong.Bounds))
+
+            if (pbPong.Bounds.IntersectsWith(pbPaddelSpieler.Bounds))
             {
-                if (MovepongX == 0)
+                // Ändern Sie den Abprallrichtung des Balls
+                int paddelRand = pbPaddelSpieler.Top + (pbPaddelSpieler.Left / 2);
+                if (PongY <= paddelRand)
                 {
+                    // Der Ball prallt nahe der linken Kante des Paddels ab
                     MovepongX = 1;
+                    MovepongY = 0;
+                    return;
                 }
                 else
                 {
-                    MovepongX = 0;
+                    // Der Ball prallt nahe der rechten Kante des Paddels ab
+                    MovepongX = 1;
+                    MovepongY = 1;
+                    return;
                 }
-
             }
         }
         void Begrenzung()
@@ -106,9 +145,11 @@ namespace Pong
             {
                 PongX++;
                 PongX++;
+                PongX++;
             }
             else
             {
+                PongX--;
                 PongX--;
                 PongX--;
             }
@@ -116,9 +157,11 @@ namespace Pong
             {
                 PongY++;
                 PongY++;
+                PongY++;
             }
             else
             {
+                PongY--;
                 PongY--;
                 PongY--;
             }
@@ -130,7 +173,7 @@ namespace Pong
         {
 
             int y = Location.Y;
-            int paddelposition = Cursor.Position.Y - 100 - y;
+            int paddelposition = Cursor.Position.Y - pbPaddelSpieler.Left - y -80;
             if (paddelposition <= 0)
             {
                 pbPaddelSpieler.Top = 0;
@@ -142,6 +185,15 @@ namespace Pong
             else
             {
                 pbPaddelSpieler.Top = paddelposition;
+            }
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Space)
+            {
+                Restart();
+                return;
             }
         }
     }

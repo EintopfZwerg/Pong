@@ -36,6 +36,7 @@
             timer1 = new System.Windows.Forms.Timer(components);
             lGewonnen = new Label();
             lVerloren = new Label();
+            lRestart = new Label();
             ((System.ComponentModel.ISupportInitialize)pbPaddelSpieler).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPaddelGegner).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pbPong).BeginInit();
@@ -70,7 +71,6 @@
             // 
             // timer1
             // 
-            timer1.Enabled = true;
             timer1.Interval = 5;
             timer1.Tick += timer1_Tick;
             // 
@@ -96,11 +96,22 @@
             lVerloren.Text = "Verloren";
             lVerloren.Visible = false;
             // 
+            // lRestart
+            // 
+            lRestart.AutoSize = true;
+            lRestart.Font = new Font("Showcard Gothic", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lRestart.Location = new Point(251, 365);
+            lRestart.Name = "lRestart";
+            lRestart.Size = new Size(267, 37);
+            lRestart.TabIndex = 5;
+            lRestart.Text = "Restart: Space";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(802, 453);
+            Controls.Add(lRestart);
             Controls.Add(lVerloren);
             Controls.Add(lGewonnen);
             Controls.Add(pbPong);
@@ -108,6 +119,7 @@
             Controls.Add(pbPaddelSpieler);
             Name = "Form1";
             Text = "Pong";
+            KeyDown += Form1_KeyDown;
             ((System.ComponentModel.ISupportInitialize)pbPaddelSpieler).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPaddelGegner).EndInit();
             ((System.ComponentModel.ISupportInitialize)pbPong).EndInit();
@@ -123,5 +135,6 @@
         private System.Windows.Forms.Timer timer1;
         private Label lGewonnen;
         private Label lVerloren;
+        private Label lRestart;
     }
 }

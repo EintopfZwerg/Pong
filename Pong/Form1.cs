@@ -1,5 +1,5 @@
-using System.Drawing;
-
+using System.Windows.Forms;
+using System;
 namespace Pong
 {
     public partial class Form1 : Form
@@ -9,6 +9,9 @@ namespace Pong
         int PongY = 150;
         int MovepongX = 0;
         int MovepongY = 1;
+        int paddelposition = 150;
+        int Maus = 0;
+
         public Form1()
         {
             InitializeComponent();
@@ -16,7 +19,10 @@ namespace Pong
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            MovePaddel();
+            if (Maus == 1)
+            {
+                MovePaddel();
+            }
             MoveGegner();
             MoveGegner();
             Begrenzung();
@@ -35,7 +41,6 @@ namespace Pong
             PongX = 410;
             PongY = 250;
             Random r = new Random();
-            int x, y;
 
             MovepongX = r.Next(0, 2);
             MovepongY = r.Next(0, 2);
@@ -173,7 +178,7 @@ namespace Pong
         {
 
             int y = Location.Y;
-            int paddelposition = Cursor.Position.Y - pbPaddelSpieler.Left - y -80;
+            paddelposition = Cursor.Position.Y - pbPaddelSpieler.Left - y - 80;
             if (paddelposition <= 0)
             {
                 pbPaddelSpieler.Top = 0;
@@ -194,7 +199,11 @@ namespace Pong
             {
                 Restart();
                 return;
-            }
+            //}
+            //if (e.KeyCode == Keys.Shift)
+            //{
+            //    pbPaddelSpieler.Top -= 10;
+            //}
         }
     }
 }
